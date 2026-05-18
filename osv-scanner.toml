@@ -1,0 +1,19 @@
+[[IgnoredVulns]]
+id = "GHSA-2mjp-6q6p-2qxm"
+reason = "undici DoS via bad TLS certificate data. Not in use: this action only makes outbound HTTPS requests to the trusted GitHub API via @actions/github."
+
+[[IgnoredVulns]]
+id = "GHSA-4992-7rv2-5pvq"
+reason = "undici cookie leak on cross-origin redirect. Not in use: this action does not send cookies and the GitHub API does not issue cross-origin redirects."
+
+[[IgnoredVulns]]
+id = "GHSA-g9mf-h72j-4rw9"
+reason = "undici insufficiently random multipart/form-data boundary. Not in use: this action does not send multipart/form-data requests."
+
+[[IgnoredVulns]]
+id = "GHSA-v9p9-hfj2-hcw8"
+reason = "undici proxy-authorization header leak on cross-origin redirect. Not in use: this action does not use a proxy and the GitHub API does not issue cross-origin redirects."
+
+[[IgnoredVulns]]
+id = "GHSA-vrm6-8vpv-qv8q"
+reason = "undici memory leak via fetch() body. Not in use: this action does not call undici.fetch() directly; @actions/github uses the undici Client API for GitHub API calls."
