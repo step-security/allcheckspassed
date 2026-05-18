@@ -1,0 +1,28 @@
+import { IStatus } from "src/statuses/statusesInterfaces";
+
+export interface ICheck {
+  id: number;
+  name: string;
+  status: string;
+  conclusion: string | null;
+  started_at: string;
+  completed_at: string | null;
+  check_suite: {
+    id: number;
+  };
+  app: {
+    id: number;
+    slug: string;
+    name: string;
+  };
+  commit_status?: IStatus;
+}
+export interface ICheckInput {
+  name: string;
+  app_id: number;
+}
+
+export interface IDetermineChecksStatus {
+  in_progress: boolean;
+  passed: boolean;
+}

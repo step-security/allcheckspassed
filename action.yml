@@ -1,0 +1,84 @@
+name: "allcheckspassed"
+description: "GitHub Action to check if all checks have passed on a specific commit"
+author: 'step-security'
+branding:
+  icon: "check-circle"
+  color: "green"
+inputs:
+  commit_sha:
+    description: "The commit sha that you want to check"
+    required: false
+  token:
+    description: "The GitHub token to use for authentication"
+    required: false
+    default: ${{ github.token }}
+  checks_include:
+    description: "A comma separated list of checks to include in the evaluation, by default, all checks are included. You can provide a list of map keys, with app_id and check_name, to include only checks from a specific app, or with a specific name. Supports regex"
+    required: false
+    default: "-1"
+  checks_exclude:
+    description: "A comma separated list of checks to exclude, if these checks fail,the action will not fail"
+    required: false
+    default: "-1"
+  treat_skipped_as_passed:
+    description: "If set to true, skipped checks will be treated as passed"
+    required: false
+    default: "true"
+  treat_neutral_as_passed:
+    description: "If set to true, neutral checks will be treated as passed"
+    required: false
+    default: "true"
+  include_status_commits:
+    description: "If set to true, the action will also check commit statuses in addition to checks"
+    required: false
+    default: "false"
+  poll:
+    description: "Whether to poll the API for completed checks or to simply check once and exit"
+    required: false
+    default: "true"
+  delay:
+    description: "The period in minutes to wait to allow the checks to complete"
+    required: false
+    default: "1"
+  polling_interval:
+    description: "The period in minutes between API calls that polls the GitHub Api for completed checks, shorter intervals may result in API rate limiting"
+    required: false
+    default: "1"
+  retries:
+    description: "The number of times to retry the API call to get the checks, if the API call fails"
+    required: false
+    default: "10"
+  fail_fast:
+    description: "The action will fail the step as soon as a single conditions for failure is met, defaults to true. This terminates the action early if a failure occurs. If you want to wait for all checks to complete before failing, set this to false"
+    required: false
+    default: "true"
+  fail_step:
+    description: "If set to true, the action will fail the step if the conditions for failure are met, defaults to true. Be careful with this option if you have configured rulesets/branch protection rules that require all checks to pass before merging"
+    required: false
+    default: "true"
+  fail_on_missing_checks:
+    description: "If set to true, the action will fail if one or more checks defined on the checks_include input are not found on the commit"
+    required: false
+    default: "false"
+  verbose:
+    description: "If set to true, the action will log which checks are being waited on in each iteration"
+    required: false
+    default: "false"
+  show_job_summary:
+    description: "If set to true, the action will log a summary of the checks that were evaluated"
+    required: false
+    default: "true"
+  check_run_id:
+    description: "This is the check run id of the current job, there is no need to set this (and setting it will actually cause a problem), the action will automatically set it for you. This is used to exclude the current job from the evaluation"
+    required: false
+    default: "${{ job.check_run_id }}"
+
+outputs:
+  checks:
+    description: "List of checks that were evaluated"
+  missing_checks:
+    description: "List of checks that were not found on the commit"
+
+runs:
+  using: node24
+  main: dist/index.js

@@ -1,0 +1,80 @@
+{
+  "name": "allcheckspassed",
+  "description": "GitHub Action to wait and confirm that all checks reported on a commit have passed",
+  "version": "2.3.0",
+  "author": "step-security",
+  "private": false,
+  "homepage": "https://github.com/step-security/allcheckspassed#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/step-security/allcheckspassed.git"
+  },
+  "bugs": {
+    "url": "https://github.com/step-security/allcheckspassed/issues"
+  },
+  "keywords": [
+    "actions",
+    "node",
+    "setup",
+    "typescript",
+    "checks"
+  ],
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "bundle": "npm run format:write && npm run package",
+    "package": "ncc build src/index.ts --license licenses.txt",
+    "test": "jest",
+    "all": "npm run build && npm run test && npm run package"
+  },
+  "license": "MIT",
+  "jest": {
+    "preset": "ts-jest",
+    "verbose": true,
+    "clearMocks": true,
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "testMatch": [
+      "**/*.test.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "coverageReporters": [
+      "json-summary",
+      "text",
+      "lcov"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "./src/**"
+    ]
+  },
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "@octokit/rest": "^20.1.1",
+    "axios": "1.15.2",
+    "yaml": "^2.8.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.14.1",
+    "@vercel/ncc": "^0.38.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.3.2",
+    "typescript": "^5.8.3"
+  }
+}
