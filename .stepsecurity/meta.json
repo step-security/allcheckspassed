@@ -1,0 +1,18 @@
+{
+   "schema_version": "1",
+   "onboarding_type": "copied",
+   "archived": false,
+   "maintained_action_name": "step-security/allcheckspassed",
+   "upstream_full_repo_name": "wechuli/allcheckspassed",
+   "action_type": "node",
+   "last_release": {
+     "tag_name": "v2.3.0",
+     "created_at": "2026-05-18T15:49:39Z",
+     "published_at": "2026-05-23T15:02:32Z"
+   },
+   "sync": {
+     "ignore_presets": [
+       "defaults_v1"
+     ]
+   }
+ }
